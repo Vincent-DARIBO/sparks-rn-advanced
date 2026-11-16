@@ -40,6 +40,10 @@ yarn-error.*
 /ios
 /android
 
+# stryker
+/reports/
+/.stryker-tmp/
+
 # local native modules build output
 /modules/*/android/build/
 /modules/*/android/.gradle/

@@ -32,6 +32,7 @@ const presetTransform =require('jest-expo/jest-preset').transform;
 
 module.exports = {
   preset: 'jest-expo',
+  watchman: false,
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
   transform: {
     ...presetTransform,
@@ -49,5 +50,4 @@ module.exports = {
     enableGlobally: false,
     doNotFake: ['nextTick', 'setImmediate', 'clearImmediate', 'queueMicrotask'],
   },
-  testPathIgnorePatterns: ['/node_modules/', '/.stryker-tmp/'],
 };
