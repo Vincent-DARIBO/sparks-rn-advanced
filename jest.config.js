@@ -45,5 +45,9 @@ module.exports = {
     '/node_modules/react-native-reanimated/plugin/',
     '/node_modules/@react-native/babel-preset/',
   ],
+  fakeTimers: {
+    enableGlobally: false,
+    doNotFake: ['nextTick', 'setImmediate', 'clearImmediate', 'queueMicrotask'],
+  },
   testPathIgnorePatterns: ['/node_modules/', '/.stryker-tmp/'],
 };
