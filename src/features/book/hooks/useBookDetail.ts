@@ -1,8 +1,6 @@
-import { useState } from 'react';
-
 import { BookNotFoundError } from '@/errors/OpenLibraryError';
+import useAddToLibrary from '@/features/book/hooks/useAddToLibrary';
 import useBook from '@/hooks/useBook';
-import { addBook } from '@/store/library';
 
 type BookDetailStatus = 'loading' | 'notFound' | 'error' | 'success';
 
@@ -15,12 +13,10 @@ function resolveStatus(isLoading: boolean, error: Error | null, hasBook: boolean
 
 export default function useBookDetail(isbn: string) {
   const { book, isLoadingBook, errorBook, refetchBook } = useBook(isbn);
-  const [isAdded, setIsAdded] = useState(false);
+  const { addToLibrary, isAddedToLibrary } = useAddToLibrary();
 
-  const addToLibrary = () => {
-    if (!book) return;
-    addBook({ isbn, title: book.title, author: book.author });
-    setIsAdded(true);
+  const addCurrentBook = () => {
+    if (book) addToLibrary(book);
   };
 
   const retry = () => {
@@ -30,8 +26,8 @@ export default function useBookDetail(isbn: string) {
   return {
     book,
     status: resolveStatus(isLoadingBook, errorBook, book !== undefined),
-    isAdded,
-    addToLibrary,
+    isAdded: isAddedToLibrary,
+    addToLibrary: addCurrentBook,
     retry,
   };
 }
