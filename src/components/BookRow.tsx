@@ -1,8 +1,8 @@
 import { Image, Pressable, Text, View } from 'react-native';
 import { useState } from 'react';
 
-import { coverUrl } from '@/api/openLibrary';
-import type { Book } from '@/types/book';
+import { coverUrl } from '@/lib/coverUrl';
+import type { Book } from '@/types/book.types';
 
 type Props = {
   book: Book;

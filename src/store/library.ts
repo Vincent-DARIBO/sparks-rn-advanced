@@ -1,7 +1,7 @@
 import { useSyncExternalStore } from 'react';
 
 import seed from '@/data/books.seed.json';
-import type { Book } from '@/types/book';
+import type { Book } from '@/types/book.types';
 
 let addedBooks: Book[] = [];
 const listeners = new Set<() => void>();
