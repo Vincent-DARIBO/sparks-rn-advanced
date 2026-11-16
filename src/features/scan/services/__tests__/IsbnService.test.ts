@@ -16,6 +16,14 @@ describe('IsbnService.isValidIsbn10', () => {
     expect(IsbnService.isValidIsbn10('0441013597')).toBe(true);
   });
 
+  it('accepte un ISBN-10 dont la clé de contrôle est X', () => {
+    expect(IsbnService.isValidIsbn10('080442957X')).toBe(true);
+  });
+
+  it('refuse un ISBN-10 terminé par X dont la clé de contrôle est fausse', () => {
+    expect(IsbnService.isValidIsbn10('080442958X')).toBe(false);
+  });
+
   it('refuse un ISBN-10 dont la clé de contrôle est fausse', () => {
     expect(IsbnService.isValidIsbn10('0441013598')).toBe(false);
   });
@@ -55,6 +63,11 @@ describe('IsbnService.isValid', () => {
   it('valide un ISBN-10 et un ISBN-13 bruts', () => {
     expect(IsbnService.isValid('0441013597')).toBe(true);
     expect(IsbnService.isValid('9780441013593')).toBe(true);
+  });
+
+  it('valide un ISBN-10 terminé par X, en majuscule ou en minuscule', () => {
+    expect(IsbnService.isValid('080442957X')).toBe(true);
+    expect(IsbnService.isValid('0-8044-2957-x')).toBe(true);
   });
 
   it('valide un ISBN saisi avec tirets et espaces', () => {
