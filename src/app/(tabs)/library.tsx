@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Button, FlatList, Text, View } from 'react-native';
 
 import BookRow from '@/components/BookRow';
+import RuntimeInfo from '@/components/RuntimeInfo';
 import { seedBooks, useAddedBooks } from '@/store/library';
 
 type SortKey = 'title' | 'author';
@@ -18,6 +19,7 @@ export default function LibraryScreen() {
 
   return (
     <View style={{ flex: 1, backgroundColor: '#fff' }}>
+      <RuntimeInfo />
       <View style={{ flexDirection: 'row', alignItems: 'center', padding: 8, gap: 8 }}>
         <Text>Trier par</Text>
         <Button title="Titre" onPress={() => setSortKey('title')} />
