@@ -19,7 +19,7 @@ function BookRow({ isbn, title, author, onPress }: Props) {
     <Pressable onPress={() => onPress(isbn)} style={styles.row}>
       <BookCover isbn={isbn} />
       <BookRowTexts title={title} author={author} />
-      <FavoriteButton />
+      <FavoriteButton isbn={isbn} />
     </Pressable>
   );
 }

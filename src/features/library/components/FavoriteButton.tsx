@@ -1,12 +1,18 @@
-import { useState } from 'react';
+import { memo } from 'react';
 import { Pressable, StyleSheet, Text } from 'react-native';
 
-export default function FavoriteButton() {
-  const [favorite, setFavorite] = useState(false);
+import useFavorite from '@/features/library/hooks/useFavorite';
+
+type Props = {
+  isbn: string;
+};
+
+function FavoriteButton({ isbn }: Props) {
+  const { isFavorite, toggleFavorite } = useFavorite(isbn);
 
   return (
-    <Pressable onPress={() => setFavorite(!favorite)} style={styles.button}>
-      <Text style={styles.icon}>{favorite ? '★' : '☆'}</Text>
+    <Pressable onPress={toggleFavorite} style={styles.button}>
+      <Text style={styles.icon}>{isFavorite ? '★' : '☆'}</Text>
     </Pressable>
   );
 }
@@ -15,3 +21,5 @@ const styles = StyleSheet.create({
   button: { padding: 8 },
   icon: { fontSize: 24 },
 });
+
+export default memo(FavoriteButton);
