@@ -1,0 +1,9 @@
+{
+  "platforms": ["apple", "android"],
+  "apple": {
+    "modules": ["ScanFeedbackExpoModule"]
+  },
+  "android": {
+    "modules": ["com.formation.scanfeedbackexpo.ScanFeedbackExpoModule"]
+  }
+}
