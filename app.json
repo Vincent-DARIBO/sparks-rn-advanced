@@ -16,7 +16,8 @@
     },
     "android": {
       "package": "com.formation.shelfscan",
-      "permissions": ["android.permission.VIBRATE", "android.permission.CAMERA"],
+      "permissions": ["android.permission.CAMERA"],
+      "blockedPermissions": ["android.permission.VIBRATE"],
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
         "foregroundImage": "./assets/android-icon-foreground.png",
