@@ -1,15 +1,23 @@
+import { createMMKV } from 'react-native-mmkv';
+
 import seed from '@/data/books.seed.json';
 import { StorageError } from '@/errors/StorageError';
 import type { Book } from '@/types/book.types';
 
-const seedBooks: Book[] = seed;
+const ADDED_BOOKS_KEY = 'added-books';
 
-let addedBooks: Book[] = [];
+const seedBooks: Book[] = seed;
+const libraryStorage = createMMKV({ id: 'library' });
+
+function readAddedBooks(): Book[] {
+  const raw = libraryStorage.getString(ADDED_BOOKS_KEY);
+  return raw ? (JSON.parse(raw) as Book[]) : [];
+}
 
 export class LibraryService {
   static async getAddedBooks(): Promise<Book[]> {
     try {
-      return [...addedBooks];
+      return readAddedBooks();
     } catch (error) {
       throw StorageError.readFailed(error);
     }
@@ -17,8 +25,9 @@ export class LibraryService {
 
   static async addBook(book: Book): Promise<Book> {
     try {
+      const addedBooks = readAddedBooks();
       if (!addedBooks.some((added) => added.isbn === book.isbn)) {
-        addedBooks = [book, ...addedBooks];
+        libraryStorage.set(ADDED_BOOKS_KEY, JSON.stringify([book, ...addedBooks]));
       }
       return book;
     } catch (error) {

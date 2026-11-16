@@ -1,6 +1,7 @@
 import { QueryClient } from '@tanstack/react-query';
 
 import { BookNotFoundError } from '@/errors/OpenLibraryError';
+import { registerLibraryMutationDefaults } from '@/lib/libraryMutations';
 
 const MAX_RETRIES = 2;
 
@@ -15,3 +16,5 @@ export const queryClient = new QueryClient({
     },
   },
 });
+
+registerLibraryMutationDefaults(queryClient);
