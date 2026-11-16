@@ -1,0 +1,55 @@
+# ShelfScan
+
+Projet fil rouge de la formation React Native avancé (2 jours). ShelfScan scanne le code-barres ISBN d'un livre, affiche sa fiche Open Library et conserve une bibliothèque personnelle.
+
+La branche `main` contient le starter volontairement naïf : chaque atelier en corrige un défaut précis.
+
+## Prérequis
+
+- Node.js 22.13 ou plus récent
+- Git et un éditeur (VS Code)
+- Android Studio avec un SDK Android récent
+- JDK 17
+- Un téléphone Android (débogage USB activé) ou un émulateur
+
+## Commandes
+
+```bash
+npm install
+npx expo run:android
+npx expo start
+npm test
+npx tsc --noEmit
+npx expo lint
+```
+
+Le projet utilise npm exclusivement. Les dossiers `android/` et `ios/` sont générés par `expo prebuild` (Continuous Native Generation) et ne sont jamais versionnés.
+
+## Branches
+
+| Branche | Contenu |
+| --- | --- |
+| `main` | Starter naïf : structure à plat, `FlatList` de 500 livres, `fetch` dans des `useEffect`, `console.log` partout |
+| `solution/m1` | Correction du M1 : informations du runtime (Hermes, Fabric) |
+| `solution/m2` | Correction du M2 : Turbo Module local et scan ISBN avec Vision Camera |
+| `solution/m3` | Correction du M3 : TanStack Query, persistance, architecture par feature |
+| `solution/m4` | Correction du M4 : tests Jest, MSW, Maestro, mutation testing |
+| `solution/m5` | Correction du M5 : profiling et optimisation des rendus |
+| `solution/m6` | Correction du M6 : FlashList v2 et expo-image |
+| `solution/m7` | Correction du M7 : Expo Module, config plugin, build et mises à jour EAS |
+| `debug/m2` | Trois pannes natives pour l'exercice de dépannage du M2 |
+| `bonus/reanimated` | Atelier optionnel sur les animations Reanimated 4 |
+
+Les branches `solution/m1` à `solution/m7` sont cumulatives.
+
+## API Open Library
+
+Gratuite et sans clé.
+
+- Fiche d'un livre : `https://openlibrary.org/isbn/{isbn}.json`
+- Recherche par titre : `https://openlibrary.org/search.json?q={titre}&page={n}&limit=20`
+- Couvertures : `https://covers.openlibrary.org/b/isbn/{isbn}-S|M|L.jpg`
+
+La liste de 500 livres de la bibliothèque (`src/data/books.seed.json`) a été générée une fois par `scripts/generate-seed.mjs` puis figée.
+
+ISBN de démonstration : `9780441013593` (Dune).

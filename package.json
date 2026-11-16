@@ -1,18 +1,37 @@
 {
   "name": "sparks-rn-advanced",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "expo-router/entry",
   "dependencies": {
     "expo": "~58.0.25",
+    "expo-constants": "~58.0.16",
+    "expo-dev-client": "~58.0.20",
+    "expo-linking": "~58.0.17",
+    "expo-router": "~58.0.31",
     "expo-status-bar": "~58.0.5",
     "react": "19.3.0",
-    "react-native": "0.88.1"
+    "react-dom": "^19.3.0",
+    "react-native": "0.88.1",
+    "react-native-gesture-handler": "~3.3.0",
+    "react-native-safe-area-context": "~5.11.1",
+    "react-native-screens": "~4.30.1"
   },
   "scripts": {
     "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
-    "web": "expo start --web"
+    "android": "expo run:android",
+    "ios": "expo run:ios",
+    "lint": "expo lint",
+    "typecheck": "tsc --noEmit",
+    "test": "jest"
   },
-  "private": true
+  "private": true,
+  "devDependencies": {
+    "@types/jest": "30.0.0",
+    "@types/react": "~19.3.0",
+    "eslint": "^9.39.5",
+    "eslint-config-expo": "~58.0.4",
+    "jest": "~30.5.2",
+    "jest-expo": "~58.0.14",
+    "typescript": "~6.0.3"
+  }
 }
