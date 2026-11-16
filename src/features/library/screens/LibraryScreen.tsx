@@ -1,4 +1,5 @@
-import { Button, FlatList, StyleSheet, Text, View } from 'react-native';
+import { FlashList } from '@shopify/flash-list';
+import { Button, StyleSheet, Text, View } from 'react-native';
 
 import RuntimeInfo from '@/components/RuntimeInfo';
 import LibraryListItem from '@/features/library/components/LibraryListItem';
@@ -21,7 +22,7 @@ export default function LibraryScreen() {
         <Button title="Titre" onPress={sortByTitle} />
         <Button title="Auteur" onPress={sortByAuthor} />
       </View>
-      <FlatList data={books} keyExtractor={keyExtractor} renderItem={renderBook} />
+      <FlashList data={books} keyExtractor={keyExtractor} renderItem={renderBook} />
     </View>
   );
 }
