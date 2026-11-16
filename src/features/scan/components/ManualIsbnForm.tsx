@@ -1,9 +1,9 @@
 import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
 
-import useManualIsbnEntry from '@/hooks/useManualIsbnEntry';
+import useManualIsbnEntry from '@/features/scan/hooks/useManualIsbnEntry';
 
 export default function ManualIsbnForm() {
-  const { isbnInput, setIsbnInput, inputError, submitIsbn } = useManualIsbnEntry();
+  const { isbnInput, setIsbnInput, inputError, isSubmitting, submitIsbn } = useManualIsbnEntry();
 
   return (
     <View style={styles.container}>
@@ -17,7 +17,7 @@ export default function ManualIsbnForm() {
         keyboardType="default"
       />
       {inputError ? <Text style={styles.error}>{inputError}</Text> : null}
-      <Button title="Rechercher" onPress={submitIsbn} />
+      <Button title="Rechercher" onPress={submitIsbn} disabled={isSubmitting} />
     </View>
   );
 }

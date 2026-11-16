@@ -1,9 +1,9 @@
 import { lazy, Suspense } from 'react';
 
-import CameraPlaceholder from '@/components/CameraPlaceholder';
-import useCameraSupport from '@/hooks/useCameraSupport';
+import CameraPlaceholder from '@/features/scan/components/CameraPlaceholder';
+import useCameraSupport from '@/features/scan/hooks/useCameraSupport';
 
-const IsbnScannerView = lazy(() => import('@/components/IsbnScannerView'));
+const IsbnScannerView = lazy(() => import('@/features/scan/components/IsbnScannerView'));
 
 export default function IsbnCamera() {
   const { isCameraSupported } = useCameraSupport();

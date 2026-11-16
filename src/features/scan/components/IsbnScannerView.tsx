@@ -1,8 +1,8 @@
 import { StyleSheet, Text, View } from 'react-native';
 import { CodeScanner } from 'react-native-vision-camera-barcode-scanner';
 
-import CameraPlaceholder from '@/components/CameraPlaceholder';
-import useIsbnScanner from '@/hooks/useIsbnScanner';
+import CameraPlaceholder from '@/features/scan/components/CameraPlaceholder';
+import useIsbnScanner from '@/features/scan/hooks/useIsbnScanner';
 
 export default function IsbnScannerView() {
   const {
