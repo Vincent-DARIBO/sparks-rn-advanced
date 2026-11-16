@@ -1,18 +1,18 @@
-import { FlashList } from '@shopify/flash-list';
+import { FlashList, type ListRenderItemInfo } from '@shopify/flash-list';
 import { Button, StyleSheet, Text, View } from 'react-native';
 
 import RuntimeInfo from '@/components/RuntimeInfo';
 import LibraryListItem from '@/features/library/components/LibraryListItem';
 import useLibraryScreen from '@/features/library/hooks/useLibraryScreen';
-import type { Book } from '@/types/book.types';
+import type { LibraryRow } from '@/features/library/types/library.types';
 
-function renderBook({ item }: { item: Book }) {
-  return <LibraryListItem book={item} />;
+function renderRow({ item }: ListRenderItemInfo<LibraryRow>) {
+  return <LibraryListItem row={item} />;
 }
 
 export default function LibraryScreen() {
-  const { books, keyExtractor, sortByTitle, sortByAuthor } = useLibraryScreen();
-  console.log('render LibraryScreen', books.length);
+  const { rows, keyExtractor, getItemType, sortByTitle, sortByAuthor } = useLibraryScreen();
+  console.log('render LibraryScreen', rows.length);
 
   return (
     <View style={styles.container}>
@@ -22,7 +22,12 @@ export default function LibraryScreen() {
         <Button title="Titre" onPress={sortByTitle} />
         <Button title="Auteur" onPress={sortByAuthor} />
       </View>
-      <FlashList data={books} keyExtractor={keyExtractor} renderItem={renderBook} />
+      <FlashList
+        data={rows}
+        keyExtractor={keyExtractor}
+        getItemType={getItemType}
+        renderItem={renderRow}
+      />
     </View>
   );
 }

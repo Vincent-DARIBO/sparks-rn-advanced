@@ -1,18 +1,28 @@
 import { memo } from 'react';
 
 import BookRow from '@/features/library/components/BookRow';
+import SectionHeader from '@/features/library/components/SectionHeader';
 import useOpenBookDetail from '@/features/library/hooks/useOpenBookDetail';
-import type { Book } from '@/types/book.types';
+import type { LibraryRow } from '@/features/library/types/library.types';
 
 type Props = {
-  book: Book;
+  row: LibraryRow;
 };
 
-function LibraryListItem({ book }: Props) {
+function LibraryListItem({ row }: Props) {
   const { openBookDetail } = useOpenBookDetail();
 
+  if (row.type === 'header') {
+    return <SectionHeader label={row.label} />;
+  }
+
   return (
-    <BookRow isbn={book.isbn} title={book.title} author={book.author} onPress={openBookDetail} />
+    <BookRow
+      isbn={row.book.isbn}
+      title={row.book.title}
+      author={row.book.author}
+      onPress={openBookDetail}
+    />
   );
 }
 
