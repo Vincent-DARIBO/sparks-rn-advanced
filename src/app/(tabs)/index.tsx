@@ -1,17 +1,27 @@
-import { StyleSheet, View } from 'react-native';
+import { KeyboardAvoidingView, StyleSheet, View } from 'react-native';
 
 import IsbnCamera from '@/components/IsbnCamera';
 import ManualIsbnForm from '@/components/ManualIsbnForm';
+import useScanLayout from '@/hooks/useScanLayout';
 
 export default function ScanScreen() {
+  const { headerHeight, isKeyboardVisible } = useScanLayout();
+
   return (
-    <View style={styles.container}>
-      <IsbnCamera />
+    <KeyboardAvoidingView
+      style={styles.container}
+      behavior="padding"
+      keyboardVerticalOffset={headerHeight}
+    >
+      <View style={isKeyboardVisible ? styles.cameraCollapsed : null}>
+        <IsbnCamera />
+      </View>
       <ManualIsbnForm />
-    </View>
+    </KeyboardAvoidingView>
   );
 }
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#fff' },
+  cameraCollapsed: { height: 0, overflow: 'hidden' },
 });
