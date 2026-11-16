@@ -2,6 +2,7 @@ import { screen, userEvent } from '@testing-library/react-native';
 import { http, HttpResponse } from 'msw';
 
 import BookDetailScreen from '@/features/book/screens/BookDetailScreen';
+import { LibraryService } from '@/features/library/services/LibraryService';
 import { NOT_FOUND_ISBN, OPEN_LIBRARY_URL, SERVER_ERROR_ISBN } from '@/mocks/handlers';
 import { server } from '@/mocks/server';
 import renderRouterWithProviders from '@/test-utils/renderRouterWithProviders';
@@ -67,5 +68,15 @@ describe('BookDetailScreen', () => {
 
     expect(await screen.findByText('Dune')).toBeOnTheScreen();
     expect(screen.queryByText('Une erreur est survenue')).not.toBeOnTheScreen();
+  });
+
+  it('affiche « Ajouté à la bibliothèque » et désactive le bouton pour un livre déjà présent', async () => {
+    await LibraryService.addBook({ isbn: DUNE_ISBN, title: 'Dune', author: 'Frank Herbert' });
+
+    await renderDetail(DUNE_ISBN);
+
+    const addedButton = await screen.findByRole('button', { name: 'Ajouté à la bibliothèque' });
+    expect(addedButton).toBeDisabled();
+    expect(screen.queryByRole('button', { name: 'Ajouter à ma bibliothèque' })).not.toBeOnTheScreen();
   });
 });
