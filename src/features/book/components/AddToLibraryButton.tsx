@@ -17,7 +17,11 @@ export default function AddToLibraryButton(props: AddToLibraryButtonProps) {
         isAdded ? styles.added : null,
         isWaitingForNetwork ? styles.waiting : null,
       ]}>
-      <Pressable disabled={isAdded || isWaitingForNetwork} onPress={onPress} style={styles.pressable}>
+      <Pressable
+        accessibilityRole="button"
+        disabled={isAdded || isWaitingForNetwork}
+        onPress={onPress}
+        style={styles.pressable}>
         <Text style={styles.label}>
           {isAdded ? 'Ajouté à la bibliothèque' : 'Ajouter à ma bibliothèque'}
         </Text>
