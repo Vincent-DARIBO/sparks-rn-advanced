@@ -34,7 +34,16 @@
       "expo-router",
       "expo-status-bar",
       "expo-dev-client",
-      "./plugins/withVibratePermission"
+      "./plugins/withVibratePermission",
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "enableMinifyInReleaseBuilds": true,
+            "enableShrinkResourcesInReleaseBuilds": true
+          }
+        }
+      ]
     ]
   }
 }
