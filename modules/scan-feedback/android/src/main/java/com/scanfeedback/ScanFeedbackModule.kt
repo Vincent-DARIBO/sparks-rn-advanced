@@ -13,7 +13,7 @@ class ScanFeedbackModule(reactContext: ReactApplicationContext) :
 
   override fun getName() = NAME
 
-  override fun vibrate(durationMs: Double, promise: Promise) {
+  override fun vibrate(durationMs: Int, promise: Promise) {
     try {
       val vibrator = reactApplicationContext.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
       vibrator.vibrate(
