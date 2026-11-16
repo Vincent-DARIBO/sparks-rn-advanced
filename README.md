@@ -50,6 +50,28 @@ Le scanner `react-native-vision-camera-barcode-scanner` embarque ML Kit (`MLKitB
 
 Les branches `solution/m1` à `solution/m7` sont cumulatives.
 
+## Déploiement (EAS)
+
+Profils d'`eas.json` : `development` (dev client), `preview` (APK installable, channel `preview`), `production` (AAB, channel `production`). `expo-updates` utilise `runtimeVersion: { policy: "fingerprint" }` : une mise à jour OTA ne cible que les binaires dont le code natif est identique.
+
+`expo.updates.url` et `expo.extra.eas.projectId` dépendent du compte Expo de chacun et ne sont pas versionnés. Pour les générer :
+
+```bash
+npx eas-cli@latest login
+npx eas-cli@latest init
+npx eas-cli@latest update:configure
+```
+
+Puis :
+
+```bash
+npx eas-cli@latest build --platform android --profile preview
+npx eas-cli@latest update --channel preview --message "Nouveau titre"
+npx eas-cli@latest build --platform android --profile production
+```
+
+Particularités de la branche `solution/m7` : `ScanFeedbackExpo` (Expo Module, `modules/scan-feedback-expo`) remplace le Turbo Module dans `ScanFeedbackService` (le Turbo Module reste dans le dépôt pour comparaison), la permission `VIBRATE` vient du config plugin `plugins/withVibratePermission.js`, les `console.*` sont supprimés en production (hors `error` et `warn`) et R8 est activé en release. Liste des vérifications à faire avec un compte Expo : `aidd-docs/tests-configuration-eas.md`.
+
 ## API Open Library
 
 Gratuite et sans clé.
