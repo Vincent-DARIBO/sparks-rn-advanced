@@ -8,6 +8,8 @@ jest.mock('react-native-scan-feedback', () => ({
   },
 }));
 
+jest.mock('expo-device', () => ({ isDevice: false }));
+
 jest.mock('react-native-vision-camera', () => ({
   useCameraPermission: jest.fn(() => ({
     hasPermission: true,

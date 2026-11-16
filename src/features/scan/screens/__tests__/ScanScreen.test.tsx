@@ -15,6 +15,15 @@ async function submitIsbn(isbn: string) {
 }
 
 describe('ScanScreen', () => {
+  it('affiche le message de repli de la caméra et garde la saisie manuelle sur simulateur', async () => {
+    await renderScan();
+
+    expect(
+      screen.getByText('Caméra indisponible sur simulateur : utilisez la saisie manuelle ci-dessous.')
+    ).toBeOnTheScreen();
+    expect(screen.getByPlaceholderText('Saisir un ISBN')).toBeOnTheScreen();
+  });
+
   it('ouvre le Détail du livre après la saisie d’un ISBN valide', async () => {
     const { getPathname } = await renderScan();
 

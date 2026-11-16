@@ -1,4 +1,4 @@
-import { Slot } from 'expo-router';
+import { Stack } from 'expo-router';
 import { renderRouter } from 'expo-router/testing-library';
 import type { ComponentType } from 'react';
 
@@ -14,7 +14,7 @@ export default async function renderRouterWithProviders(routes: Routes, initialU
   function ProvidersLayout() {
     return (
       <QueryWrapper>
-        <Slot />
+        <Stack />
       </QueryWrapper>
     );
   }
