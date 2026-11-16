@@ -20,7 +20,7 @@ export default function LibraryScreen() {
   );
 
   const renderItem = useCallback(
-    ({ item }: { item: Book }) => <BookRow book={item} onPress={handlePress} />,
+    ({ item }: { item: Book }) => <BookRow isbn={item.isbn} title={item.title} author={item.author} onPress={handlePress} />,
     [handlePress],
   );
 

@@ -1,28 +1,25 @@
-import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
-import { memo, useState } from 'react';
+import { memo } from 'react';
+import { Pressable, StyleSheet } from 'react-native';
 
-import { coverUrl } from '@/lib/coverUrl';
-import type { Book } from '@/types/book.types';
+import BookCover from '@/features/library/components/BookCover';
+import BookRowTexts from '@/features/library/components/BookRowTexts';
+import FavoriteButton from '@/features/library/components/FavoriteButton';
 
 type Props = {
-  book: Book;
+  isbn: string;
+  title: string;
+  author: string;
   onPress: (isbn: string) => void;
 };
 
-function BookRow({ book, onPress }: Props) {
-  const [favorite, setFavorite] = useState(false);
-  console.log('render BookRow', book.isbn);
+function BookRow({ isbn, title, author, onPress }: Props) {
+  console.log('render BookRow', isbn);
 
   return (
-    <Pressable onPress={() => onPress(book.isbn)} style={styles.row}>
-      <Image source={{ uri: coverUrl(book.isbn, 'L') }} style={styles.cover} />
-      <View style={styles.texts}>
-        <Text style={styles.title}>{book.title}</Text>
-        <Text style={styles.author}>{book.author}</Text>
-      </View>
-      <Pressable onPress={() => setFavorite(!favorite)} style={styles.favoriteButton}>
-        <Text style={styles.favoriteIcon}>{favorite ? '★' : '☆'}</Text>
-      </Pressable>
+    <Pressable onPress={() => onPress(isbn)} style={styles.row}>
+      <BookCover isbn={isbn} />
+      <BookRowTexts title={title} author={author} />
+      <FavoriteButton />
     </Pressable>
   );
 }
@@ -35,12 +32,6 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderColor: '#ddd',
   },
-  cover: { width: 48, height: 72, marginRight: 12, backgroundColor: '#eee' },
-  texts: { flex: 1 },
-  title: { fontSize: 16, fontWeight: '600' },
-  author: { color: '#666' },
-  favoriteButton: { padding: 8 },
-  favoriteIcon: { fontSize: 24 },
 });
 
 export default memo(BookRow);
