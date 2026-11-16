@@ -8,6 +8,13 @@ type AddToLibraryContext = {
   previousBooks?: Book[];
 };
 
+export async function syncLibraryAfterRestore(client: QueryClient) {
+  await client.resumePausedMutations();
+  if (client.isMutating({ mutationKey: addToLibraryMutationKey }) === 0) {
+    await client.invalidateQueries({ queryKey: libraryKeys.all });
+  }
+}
+
 export function registerLibraryMutationDefaults(client: QueryClient) {
   const addToLibraryOptions: MutationObserverOptions<Book, Error, Book, AddToLibraryContext> = {
     mutationFn: (book) => LibraryService.addBook(book),

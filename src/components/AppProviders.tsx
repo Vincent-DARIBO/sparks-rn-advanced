@@ -1,6 +1,7 @@
 import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client';
 import type { ReactNode } from 'react';
 
+import { syncLibraryAfterRestore } from '@/lib/libraryMutations';
 import { QUERY_CACHE_MAX_AGE, queryClient } from '@/lib/queryClient';
 import { setupQueryLifecycle } from '@/lib/queryLifecycle';
 import { queryPersister } from '@/lib/queryPersister';
@@ -20,7 +21,7 @@ export default function AppProviders(props: AppProvidersProps) {
     <PersistQueryClientProvider
       client={queryClient}
       persistOptions={persistOptions}
-      onSuccess={() => queryClient.resumePausedMutations()}
+      onSuccess={() => syncLibraryAfterRestore(queryClient)}
     >
       {children}
     </PersistQueryClientProvider>
