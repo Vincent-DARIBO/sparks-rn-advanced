@@ -6,7 +6,7 @@ import type { Book } from '@/types/book.types';
 
 type Props = {
   book: Book;
-  onPress: () => void;
+  onPress: (isbn: string) => void;
 };
 
 function BookRow({ book, onPress }: Props) {
@@ -15,7 +15,7 @@ function BookRow({ book, onPress }: Props) {
 
   return (
     <Pressable
-      onPress={onPress}
+      onPress={() => onPress(book.isbn)}
       style={{
         flexDirection: 'row',
         alignItems: 'center',

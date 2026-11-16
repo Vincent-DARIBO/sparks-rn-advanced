@@ -1,13 +1,28 @@
 import { useRouter } from 'expo-router';
+import { useCallback } from 'react';
 import { Button, FlatList, Text, View } from 'react-native';
 
 import RuntimeInfo from '@/components/RuntimeInfo';
 import BookRow from '@/features/library/components/BookRow';
 import useLibrary from '@/features/library/hooks/useLibrary';
+import type { Book } from '@/types/book.types';
 
 export default function LibraryScreen() {
   const router = useRouter();
   const { addedBooks, seedBooks, sortKey, setSortKey } = useLibrary();
+
+  const handlePress = useCallback(
+    (isbn: string) => {
+      console.log('ouverture du détail', isbn);
+      router.push(`/book/${isbn}`);
+    },
+    [router],
+  );
+
+  const renderItem = useCallback(
+    ({ item }: { item: Book }) => <BookRow book={item} onPress={handlePress} />,
+    [handlePress],
+  );
 
   const sorted = [...seedBooks].sort((a, b) => a[sortKey].localeCompare(b[sortKey]));
   const books = [...addedBooks, ...sorted];
@@ -24,15 +39,7 @@ export default function LibraryScreen() {
       <FlatList
         data={books}
         keyExtractor={(item) => item.isbn}
-        renderItem={({ item }) => (
-          <BookRow
-            book={item}
-            onPress={() => {
-              console.log('ouverture du détail', item.isbn);
-              router.push(`/book/${item.isbn}`);
-            }}
-          />
-        )}
+        renderItem={renderItem}
       />
     </View>
   );
