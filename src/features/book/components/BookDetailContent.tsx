@@ -2,6 +2,7 @@ import { Button, StyleSheet, Text, View } from 'react-native';
 
 import AppearingSection from '@/features/book/components/AppearingSection';
 import FlyingCover from '@/features/book/components/FlyingCover';
+import JsThreadDemo from '@/features/book/components/JsThreadDemo';
 import useAddedBookFlight from '@/features/book/hooks/useAddedBookFlight';
 import { coverUrl } from '@/lib/coverUrl';
 import type { Book } from '@/types/book.types';
@@ -29,6 +30,7 @@ export default function BookDetailContent(props: BookDetailContentProps) {
           onPress={addWithFlight}
         />
         {isWaitingForNetwork ? <Text style={styles.pending}>En attente de connexion</Text> : null}
+        <JsThreadDemo />
       </AppearingSection>
     </View>
   );
