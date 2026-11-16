@@ -1,5 +1,5 @@
 import { Image, Pressable, Text, View } from 'react-native';
-import { useState } from 'react';
+import { memo, useState } from 'react';
 
 import { coverUrl } from '@/lib/coverUrl';
 import type { Book } from '@/types/book.types';
@@ -9,7 +9,7 @@ type Props = {
   onPress: () => void;
 };
 
-export default function BookRow({ book, onPress }: Props) {
+function BookRow({ book, onPress }: Props) {
   const [favorite, setFavorite] = useState(false);
   console.log('render BookRow', book.isbn);
 
@@ -38,3 +38,5 @@ export default function BookRow({ book, onPress }: Props) {
     </Pressable>
   );
 }
+
+export default memo(BookRow);
