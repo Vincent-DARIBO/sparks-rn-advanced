@@ -29,6 +29,6 @@ class ScanFeedbackModule(reactContext: ReactApplicationContext) :
   override fun getDeviceModel(): String = "${Build.MANUFACTURER} ${Build.MODEL}"
 
   companion object {
-    const val NAME = "ScanFeedback"
+    const val NAME = "ScanFeedbackModule"
   }
 }
