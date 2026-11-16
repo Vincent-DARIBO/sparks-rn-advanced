@@ -1,34 +1,16 @@
-import { useRouter } from 'expo-router';
-import { useCallback, useMemo } from 'react';
 import { Button, FlatList, StyleSheet, Text, View } from 'react-native';
 
 import RuntimeInfo from '@/components/RuntimeInfo';
-import BookRow from '@/features/library/components/BookRow';
-import useLibrary from '@/features/library/hooks/useLibrary';
+import LibraryListItem from '@/features/library/components/LibraryListItem';
+import useLibraryScreen from '@/features/library/hooks/useLibraryScreen';
 import type { Book } from '@/types/book.types';
 
+function renderBook({ item }: { item: Book }) {
+  return <LibraryListItem book={item} />;
+}
+
 export default function LibraryScreen() {
-  const router = useRouter();
-  const { addedBooks, seedBooks, sortKey, setSortKey } = useLibrary();
-
-  const handlePress = useCallback(
-    (isbn: string) => {
-      console.log('ouverture du détail', isbn);
-      router.push(`/book/${isbn}`);
-    },
-    [router],
-  );
-
-  const renderItem = useCallback(
-    ({ item }: { item: Book }) => <BookRow isbn={item.isbn} title={item.title} author={item.author} onPress={handlePress} />,
-    [handlePress],
-  );
-
-  const sortedSeedBooks = useMemo(
-    () => [...seedBooks].sort((a, b) => a[sortKey].localeCompare(b[sortKey])),
-    [seedBooks, sortKey],
-  );
-  const books = useMemo(() => [...addedBooks, ...sortedSeedBooks], [addedBooks, sortedSeedBooks]);
+  const { books, keyExtractor, sortByTitle, sortByAuthor } = useLibraryScreen();
   console.log('render LibraryScreen', books.length);
 
   return (
@@ -36,14 +18,10 @@ export default function LibraryScreen() {
       <RuntimeInfo />
       <View style={styles.sortBar}>
         <Text>Trier par</Text>
-        <Button title="Titre" onPress={() => setSortKey('title')} />
-        <Button title="Auteur" onPress={() => setSortKey('author')} />
+        <Button title="Titre" onPress={sortByTitle} />
+        <Button title="Auteur" onPress={sortByAuthor} />
       </View>
-      <FlatList
-        data={books}
-        keyExtractor={(item) => item.isbn}
-        renderItem={renderItem}
-      />
+      <FlatList data={books} keyExtractor={keyExtractor} renderItem={renderBook} />
     </View>
   );
 }
