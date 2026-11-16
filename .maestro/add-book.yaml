@@ -9,22 +9,37 @@ name: Ajouter un livre à la bibliothèque
     commands:
       - openLink: "exp+shelfscan://expo-development-client/?url=http%3A%2F%2Flocalhost%3A8081"
 - extendedWaitUntil:
-    visible: "Saisir un ISBN"
+    visible: "Continue|While using the app|Saisir un ISBN"
     timeout: 90000
+- runFlow:
+    when:
+      visible: "While using the app"
+    commands:
+      - tapOn: "While using the app"
 - runFlow:
     when:
       visible: "Continue"
     commands:
       - tapOn: "Continue"
+      - tapOn: "Close"
 - runFlow:
     when:
-      visible: "Don.t [Aa]llow"
+      visible: "While using the app"
     commands:
-      - tapOn: "Don.t [Aa]llow"
+      - tapOn: "While using the app"
+- extendedWaitUntil:
+    visible: "Saisir un ISBN"
+    timeout: 30000
 - tapOn: "Saisir un ISBN"
+- waitForAnimationToEnd:
+    timeout: 3000
 - inputText: "9780441013593"
+- assertVisible: "9780441013593"
 - hideKeyboard
 - tapOn: "Rechercher"
+- extendedWaitUntil:
+    visible: "Ajouter à ma bibliothèque"
+    timeout: 20000
 - assertVisible: "Dune"
 - tapOn: "Ajouter à ma bibliothèque"
 - assertVisible: "Ajouté à la bibliothèque"
