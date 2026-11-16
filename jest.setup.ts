@@ -21,10 +21,14 @@ jest.mock('react-native-vision-camera-barcode-scanner', () => ({
   CodeScanner: () => null,
 }));
 
+jest.mock('react-native-nitro-modules', () => ({
+  NitroModules: { createHybridObject: jest.fn() },
+}));
+
 jest.mock('@react-native-community/netinfo', () =>
   jest.requireActual('@react-native-community/netinfo/jest/netinfo-mock.js'),
 );
 
-beforeAll(() => server.listen({ onUnhandledRequest: 'error' }));
+beforeAll(() => server.listen({ onUnhandledFrame: 'error' }));
 afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
