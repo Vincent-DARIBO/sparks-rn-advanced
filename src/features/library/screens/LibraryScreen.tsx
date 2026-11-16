@@ -1,5 +1,5 @@
 import { useRouter } from 'expo-router';
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 import { Button, FlatList, Text, View } from 'react-native';
 
 import RuntimeInfo from '@/components/RuntimeInfo';
@@ -24,8 +24,11 @@ export default function LibraryScreen() {
     [handlePress],
   );
 
-  const sorted = [...seedBooks].sort((a, b) => a[sortKey].localeCompare(b[sortKey]));
-  const books = [...addedBooks, ...sorted];
+  const sortedSeedBooks = useMemo(
+    () => [...seedBooks].sort((a, b) => a[sortKey].localeCompare(b[sortKey])),
+    [seedBooks, sortKey],
+  );
+  const books = useMemo(() => [...addedBooks, ...sortedSeedBooks], [addedBooks, sortedSeedBooks]);
   console.log('render LibraryScreen', books.length);
 
   return (
