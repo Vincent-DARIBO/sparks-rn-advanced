@@ -1,4 +1,4 @@
-import ScanFeedback from 'react-native-scan-feedback';
+import ScanFeedback from '../../../modules/scan-feedback-expo';
 
 import { ScanFeedbackError } from '@/errors/ScanFeedbackError';
 import { ScanFeedbackService } from '@/services/ScanFeedbackService';

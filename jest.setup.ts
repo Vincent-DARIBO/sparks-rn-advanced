@@ -1,6 +1,6 @@
 import { server } from '@/mocks/server';
 
-jest.mock('react-native-scan-feedback', () => ({
+jest.mock('./modules/scan-feedback-expo', () => ({
   __esModule: true,
   default: {
     vibrate: jest.fn().mockResolvedValue(undefined),
