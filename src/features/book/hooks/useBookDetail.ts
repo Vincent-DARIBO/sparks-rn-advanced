@@ -1,8 +1,7 @@
 import { BookNotFoundError } from '@/errors/OpenLibraryError';
 import useAddToLibrary from '@/features/book/hooks/useAddToLibrary';
+import type { BookDetailStatus } from '@/features/book/types/bookDetail.types';
 import useBook from '@/hooks/useBook';
-
-type BookDetailStatus = 'loading' | 'notFound' | 'error' | 'success';
 
 function resolveStatus(isLoading: boolean, error: Error | null, hasBook: boolean): BookDetailStatus {
   if (isLoading) return 'loading';
