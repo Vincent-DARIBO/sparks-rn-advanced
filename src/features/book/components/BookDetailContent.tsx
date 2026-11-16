@@ -1,5 +1,6 @@
 import { Button, StyleSheet, Text, View } from 'react-native';
 
+import AppearingSection from '@/features/book/components/AppearingSection';
 import FlyingCover from '@/features/book/components/FlyingCover';
 import useAddedBookFlight from '@/features/book/hooks/useAddedBookFlight';
 import { coverUrl } from '@/lib/coverUrl';
@@ -19,14 +20,16 @@ export default function BookDetailContent(props: BookDetailContentProps) {
   return (
     <View style={styles.container}>
       <FlyingCover uri={coverUrl(book.isbn, 'L')} coverRef={coverRef} flightStyle={flightStyle} />
-      <Text style={styles.title}>{book.title}</Text>
-      <Text>{book.numberOfPages ? `${book.numberOfPages} pages` : 'Nombre de pages inconnu'}</Text>
-      <Button
-        title={isAdded ? 'Ajouté à la bibliothèque' : 'Ajouter à ma bibliothèque'}
-        disabled={isAdded || isWaitingForNetwork}
-        onPress={addWithFlight}
-      />
-      {isWaitingForNetwork ? <Text style={styles.pending}>En attente de connexion</Text> : null}
+      <AppearingSection>
+        <Text style={styles.title}>{book.title}</Text>
+        <Text>{book.numberOfPages ? `${book.numberOfPages} pages` : 'Nombre de pages inconnu'}</Text>
+        <Button
+          title={isAdded ? 'Ajouté à la bibliothèque' : 'Ajouter à ma bibliothèque'}
+          disabled={isAdded || isWaitingForNetwork}
+          onPress={addWithFlight}
+        />
+        {isWaitingForNetwork ? <Text style={styles.pending}>En attente de connexion</Text> : null}
+      </AppearingSection>
     </View>
   );
 }
