@@ -1,0 +1,21 @@
+{
+  "name": "react-native-scan-feedback",
+  "version": "0.0.0",
+  "description": "Retour haptique et modele de l'appareil pour ShelfScan",
+  "main": "src/index",
+  "codegenConfig": {
+    "name": "ScanFeedbackSpec",
+    "type": "modules",
+    "jsSrcsDir": "src",
+    "android": {
+      "javaPackageName": "com.scanfeedback"
+    }
+  },
+  "author": "Formation",
+  "license": "UNLICENSED",
+  "create-react-native-library": {
+    "type": "turbo-module",
+    "languages": "kotlin-objc",
+    "version": "0.64.0"
+  }
+}
