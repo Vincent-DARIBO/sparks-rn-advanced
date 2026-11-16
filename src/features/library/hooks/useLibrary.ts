@@ -10,7 +10,6 @@ export default function useLibrary() {
     queryFn: () => LibraryService.getAddedBooks(),
     networkMode: 'always',
     staleTime: Infinity,
-    refetchOnMount: 'always',
   });
   const sortKey = useLibraryStore((state) => state.sortKey);
   const setSortKey = useLibraryStore((state) => state.setSortKey);

@@ -7,7 +7,8 @@ import useBookDetail from '@/features/book/hooks/useBookDetail';
 
 export default function BookDetailScreen() {
   const { isbn } = useLocalSearchParams<{ isbn: string }>();
-  const { book, status, isAdded, addToLibrary, retry } = useBookDetail(isbn);
+  const { book, status, isAdded, isAddWaitingForNetwork, addToLibrary, retry } =
+    useBookDetail(isbn);
 
   if (status === 'loading') return <BookDetailLoading />;
   if (status === 'notFound') return <BookDetailMessage title="Livre introuvable" />;
@@ -18,7 +19,12 @@ export default function BookDetailScreen() {
   return (
     <>
       <Stack.Screen options={{ title: book.title }} />
-      <BookDetailContent book={book} isAdded={isAdded} onAdd={addToLibrary} />
+      <BookDetailContent
+        book={book}
+        isAdded={isAdded}
+        isWaitingForNetwork={isAddWaitingForNetwork}
+        onAdd={addToLibrary}
+      />
     </>
   );
 }

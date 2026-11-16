@@ -11,7 +11,6 @@ type AddToLibraryContext = {
 export function registerLibraryMutationDefaults(client: QueryClient) {
   const addToLibraryOptions: MutationObserverOptions<Book, Error, Book, AddToLibraryContext> = {
     mutationFn: (book) => LibraryService.addBook(book),
-    networkMode: 'always',
     onMutate: async (book) => {
       await client.cancelQueries({ queryKey: libraryKeys.all });
       const previousBooks = client.getQueryData<Book[]>(libraryKeys.all);

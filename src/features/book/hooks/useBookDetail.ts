@@ -12,7 +12,7 @@ function resolveStatus(isLoading: boolean, error: Error | null, hasBook: boolean
 
 export default function useBookDetail(isbn: string) {
   const { book, isLoadingBook, errorBook, refetchBook } = useBook(isbn);
-  const { addToLibrary, isAddedToLibrary } = useAddToLibrary();
+  const { addToLibrary, isAddedToLibrary, isAddToLibraryPaused } = useAddToLibrary();
 
   const addCurrentBook = () => {
     if (book) addToLibrary(book);
@@ -26,6 +26,7 @@ export default function useBookDetail(isbn: string) {
     book,
     status: resolveStatus(isLoadingBook, errorBook, book !== undefined),
     isAdded: isAddedToLibrary,
+    isAddWaitingForNetwork: isAddToLibraryPaused,
     addToLibrary: addCurrentBook,
     retry,
   };

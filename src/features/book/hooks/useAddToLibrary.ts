@@ -11,7 +11,7 @@ type UseAddToLibraryOptions = {
 export default function useAddToLibrary(options: UseAddToLibraryOptions = {}) {
   const { onSuccess, onError } = options;
 
-  const { mutate, isPending, isSuccess, error } = useMutation<Book, Error, Book>({
+  const { mutate, isPending, isPaused, isSuccess, error } =useMutation<Book, Error, Book>({
     mutationKey: addToLibraryMutationKey,
   });
 
@@ -25,6 +25,7 @@ export default function useAddToLibrary(options: UseAddToLibraryOptions = {}) {
   return {
     addToLibrary,
     isAddingToLibrary: isPending,
+    isAddToLibraryPaused: isPaused,
     isAddedToLibrary: isSuccess,
     errorAddToLibrary: error,
   };
