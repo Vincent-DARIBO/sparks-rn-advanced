@@ -1,5 +1,6 @@
+import { Image } from 'expo-image';
 import { memo } from 'react';
-import { Image, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import { coverUrl } from '@/lib/coverUrl';
 
@@ -8,7 +9,15 @@ type Props = {
 };
 
 function BookCover({ isbn }: Props) {
-  return <Image source={{ uri: coverUrl(isbn, 'L') }} style={styles.cover} />;
+  return (
+    <Image
+      source={{ uri: coverUrl(isbn, 'M') }}
+      recyclingKey={isbn}
+      cachePolicy="memory-disk"
+      transition={150}
+      style={styles.cover}
+    />
+  );
 }
 
 const styles = StyleSheet.create({
