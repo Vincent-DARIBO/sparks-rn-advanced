@@ -2,6 +2,7 @@ import { BookNotFoundError } from '@/errors/OpenLibraryError';
 import useAddToLibrary from '@/features/book/hooks/useAddToLibrary';
 import type { BookDetailStatus } from '@/features/book/types/bookDetail.types';
 import useBook from '@/hooks/useBook';
+import useIsBookInLibrary from '@/hooks/useIsBookInLibrary';
 
 function resolveStatus(isLoading: boolean, error: Error | null, hasBook: boolean): BookDetailStatus {
   if (isLoading) return 'loading';
@@ -12,7 +13,8 @@ function resolveStatus(isLoading: boolean, error: Error | null, hasBook: boolean
 
 export default function useBookDetail(isbn: string) {
   const { book, isLoadingBook, errorBook, refetchBook } = useBook(isbn);
-  const { addToLibrary, isAddedToLibrary, isAddToLibraryPaused } = useAddToLibrary();
+  const { addToLibrary, isAddToLibraryPaused } = useAddToLibrary();
+  const { isInLibrary } = useIsBookInLibrary(isbn);
 
   const addCurrentBook = () => {
     if (book) addToLibrary(book);
@@ -25,7 +27,7 @@ export default function useBookDetail(isbn: string) {
   return {
     book,
     status: resolveStatus(isLoadingBook, errorBook, book !== undefined),
-    isAdded: isAddedToLibrary,
+    isAdded: isInLibrary,
     isAddWaitingForNetwork: isAddToLibraryPaused,
     addToLibrary: addCurrentBook,
     retry,
