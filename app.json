@@ -9,11 +9,14 @@
     "userInterfaceStyle": "light",
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.formation.shelfscan"
+      "bundleIdentifier": "com.formation.shelfscan",
+      "infoPlist": {
+        "NSCameraUsageDescription": "ShelfScan utilise la caméra pour scanner le code-barres ISBN d'un livre."
+      }
     },
     "android": {
       "package": "com.formation.shelfscan",
-      "permissions": ["android.permission.VIBRATE"],
+      "permissions": ["android.permission.VIBRATE", "android.permission.CAMERA"],
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
         "foregroundImage": "./assets/android-icon-foreground.png",
