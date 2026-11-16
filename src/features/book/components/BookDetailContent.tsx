@@ -1,5 +1,6 @@
-import { Button, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
+import AddToLibraryButton from '@/features/book/components/AddToLibraryButton';
 import AppearingSection from '@/features/book/components/AppearingSection';
 import FlyingCover from '@/features/book/components/FlyingCover';
 import JsThreadDemo from '@/features/book/components/JsThreadDemo';
@@ -24,9 +25,9 @@ export default function BookDetailContent(props: BookDetailContentProps) {
       <AppearingSection>
         <Text style={styles.title}>{book.title}</Text>
         <Text>{book.numberOfPages ? `${book.numberOfPages} pages` : 'Nombre de pages inconnu'}</Text>
-        <Button
-          title={isAdded ? 'Ajouté à la bibliothèque' : 'Ajouter à ma bibliothèque'}
-          disabled={isAdded || isWaitingForNetwork}
+        <AddToLibraryButton
+          isAdded={isAdded}
+          isWaitingForNetwork={isWaitingForNetwork}
           onPress={addWithFlight}
         />
         {isWaitingForNetwork ? <Text style={styles.pending}>En attente de connexion</Text> : null}
