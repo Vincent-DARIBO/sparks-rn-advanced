@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "main": "expo-router/entry",
   "dependencies": {
+    "@react-native-community/netinfo": "12.0.1",
+    "@tanstack/query-sync-storage-persister": "^5.107.1",
+    "@tanstack/react-query": "^5.107.1",
+    "@tanstack/react-query-persist-client": "^5.107.1",
     "expo": "~58.0.25",
     "expo-constants": "~58.0.16",
     "expo-dev-client": "~58.0.20",
@@ -14,13 +18,15 @@
     "react-dom": "^19.3.0",
     "react-native": "0.88.1",
     "react-native-gesture-handler": "~3.3.0",
+    "react-native-mmkv": "^4.3.2",
     "react-native-nitro-image": "^0.15.2",
     "react-native-nitro-modules": "^0.37.2",
     "react-native-safe-area-context": "~5.11.1",
     "react-native-scan-feedback": "file:./modules/scan-feedback",
     "react-native-screens": "~4.30.1",
     "react-native-vision-camera": "^5.2.4",
-    "react-native-vision-camera-barcode-scanner": "^5.2.4"
+    "react-native-vision-camera-barcode-scanner": "^5.2.4",
+    "zustand": "^5.1.0"
   },
   "scripts": {
     "start": "expo start",

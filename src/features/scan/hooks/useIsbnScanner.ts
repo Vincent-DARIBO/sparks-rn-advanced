@@ -3,9 +3,9 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { useCameraDevice, useCameraPermission } from 'react-native-vision-camera';
 import type { Barcode } from 'react-native-vision-camera-barcode-scanner';
 
-import useBookNavigation from '@/hooks/useBookNavigation';
-import useScanFeedback from '@/hooks/useScanFeedback';
-import { findIsbnInBarcodes } from '@/utils/isbnBarcode';
+import useBookNavigation from '@/features/scan/hooks/useBookNavigation';
+import useScanFeedback from '@/features/scan/hooks/useScanFeedback';
+import { IsbnService } from '@/features/scan/services/IsbnService';
 
 export default function useIsbnScanner() {
   const { hasPermission, canRequestPermission, requestPermission } = useCameraPermission();
@@ -32,12 +32,12 @@ export default function useIsbnScanner() {
 
   const handleBarcodesScanned = (barcodes: Barcode[]) => {
     if (isIsbnHandledRef.current) return;
-    const isbn = findIsbnInBarcodes(barcodes);
+    const isbn = IsbnService.findIsbnInBarcodes(barcodes);
     if (isbn === null) return;
     isIsbnHandledRef.current = true;
     setHasScannedIsbn(true);
     void vibrateOnSuccess();
-    openBookDetail(isbn);
+    void openBookDetail(isbn);
   };
 
   const handleScannerError = (error: Error) => {

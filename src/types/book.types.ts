@@ -2,12 +2,7 @@ export type Book = {
   isbn: string;
   title: string;
   author: string;
-};
-
-export type BookDetails = {
-  title: string;
   numberOfPages?: number;
-  byStatement?: string;
 };
 
 export type SearchResult = {
@@ -15,4 +10,10 @@ export type SearchResult = {
   title: string;
   author: string;
   isbn?: string;
+};
+
+export type SearchPage = {
+  results: SearchResult[];
+  page: number;
+  hasMore: boolean;
 };
