@@ -25,6 +25,14 @@ npx expo lint
 
 Le projet utilise npm exclusivement. Les dossiers `android/` et `ios/` sont générés par `expo prebuild` (Continuous Native Generation) et ne sont jamais versionnés.
 
+## Simulateur iOS (Apple silicon)
+
+```bash
+LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 npm run ios:simulator -- --device "iPhone 17"
+```
+
+Le scanner `react-native-vision-camera-barcode-scanner` embarque ML Kit (`MLKitBarcodeScanning`, `MLImage`), dont la tranche arm64 n'existe que pour appareil : le link échoue sur un simulateur Apple silicon. Le script pose `SHELFSCAN_IOS_SIMULATOR=1`, que `react-native.config.js` lit pour exclure le scanner de l'autolinking iOS, puis lance `expo prebuild --clean --platform ios` et `expo run:ios`. Sur simulateur, l'écran Scan affiche « Caméra indisponible sur simulateur » et la saisie manuelle reste utilisable. Le scan réel se teste sur appareil (Android ou iPhone) avec `npx expo run:ios --device` ou `npx expo run:android`, sans la variable ; relancer `npx expo prebuild --clean` avant de repasser sur appareil.
+
 ## Branches
 
 | Branche | Contenu |

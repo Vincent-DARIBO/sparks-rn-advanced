@@ -1,0 +1,25 @@
+name: E2E Maestro
+
+on:
+  workflow_dispatch: {}
+  pull_request:
+    branches: ['main']
+
+jobs:
+  build_android_e2e:
+    name: Build APK de test
+    type: build
+    params:
+      platform: android
+      profile: e2e-test
+
+  maestro_add_book:
+    name: Flow Maestro add-book
+    needs: [build_android_e2e]
+    type: maestro
+    runs_on: linux-large-nested-virtualization
+    params:
+      build_id: ${{ needs.build_android_e2e.outputs.build_id }}
+      flow_path: ./.maestro/add-book.yaml
+      retries: 1
+      record_screen: true
