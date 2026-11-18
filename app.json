@@ -16,7 +16,10 @@
     },
     "android": {
       "package": "com.formation.shelfscan",
-      "permissions": ["android.permission.VIBRATE", "android.permission.CAMERA"],
+      "permissions": [
+        "android.permission.VIBRATE",
+        "android.permission.CAMERA"
+      ],
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
         "foregroundImage": "./assets/android-icon-foreground.png",
@@ -27,6 +30,21 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "plugins": ["expo-router", "expo-status-bar", "expo-dev-client"]
+    "plugins": [
+      "expo-router",
+      "expo-status-bar",
+      "expo-dev-client"
+    ],
+    "extra": {
+      "router": {
+        "asyncRoutes": {
+          "web": true
+        }
+      },
+      "eas": {
+        "projectId": "af1bfae8-b3e3-46f7-964d-920cf0c028e8"
+      }
+    },
+    "owner": "vincent-daribo"
   }
 }
